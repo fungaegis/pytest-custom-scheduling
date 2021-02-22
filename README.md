@@ -21,7 +21,7 @@ tip: pytest-xdist must be turned on
 
 Use `${...}` as a marker custom grouping.
 
-demo
+Demo
 =====
 
 ```python
