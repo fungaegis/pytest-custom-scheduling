@@ -11,7 +11,7 @@ from xdist.scheduler import (
 class LoadCustomNameScheduling(LoadScopeScheduling):
 
     def _split_scope(self, nodeid):
-        pattern = r"\${(\w*)}"
+        pattern = r"{(\w*)}"
         res = re.search(pattern, nodeid)
         if res:
             return res.group(1)

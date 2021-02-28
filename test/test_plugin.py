@@ -90,7 +90,7 @@ def test_xidst_on_switch_on_none_param(testdir):
             assert a == b
   
         @pytest.mark.parametrize("group", ["group_1", "group_2", "group_3"], 
-                                 ids=["group_1", "group_2}", "group_3"])          
+                                 ids=["group_1", "group_2", "group_3"])          
         def test_04(group):
             a = "hello"
             b = "world"
@@ -113,31 +113,31 @@ def test_n_on_switch_on_have_param(testdir):
         @pytest.mark.parametrize("group", 
                                  ["group_1", "group_2", "group_3", "group_4", "group_5", "group_6", 
                                   "group_7", "group_8", "group_9", "group_10", "group_11", "group_12"], 
-                                 ids=["group_1${group_1}", "group_2${group_2}", "group_3${group_3}", 
-                                      "group_4${group_4}", "group_5${group_5}", "group_6${group_6}", 
-                                      "group_7${group_7}", "group_8${group_8}", "group_9${group_9}", 
-                                      "group_10${group_10}", "group_11${group_11}", "group_12${group_12}"])
+                                 ids=["group_1{group_1}", "group_2{group_2}", "group_3{group_3}", 
+                                      "group_4{group_4}", "group_5{group_5}", "group_6{group_6}", 
+                                      "group_7{group_7}", "group_8{group_8}", "group_9{group_9}", 
+                                      "group_10{group_10}", "group_11{group_11}", "group_12{group_12}"])
         def test_01(group):
             a = "hello world"
             b = "hello world"
             assert a == b
             
         @pytest.mark.parametrize("group", ["group_1", "group_2", "group_3"], 
-                                 ids=["group_1${group_1}", "group_2${group_2}", "group_3${group_3}"])
+                                 ids=["group_1{group_1}", "group_2{group_2}", "group_3{group_3}"])
         def test_02(group):
             a = "hello"
             b = "world"
             assert a == b
             
         @pytest.mark.parametrize("group", ["group_4", "group_5", "group_6"], 
-                                 ids=["group_4${group_4}", "group_5${group_5}", "group_5${group_5}"])
+                                 ids=["group_4{group_4}", "group_5{group_5}", "group_5{group_5}"])
         def test_03(group):
             a = "hello"
             b = "world"
             assert a == b
             
         @pytest.mark.parametrize("group", ["group_4", "group_5", "group_6"], 
-                                 ids=["group_4${group_4}", "group_4${group_4}", "group_4${group_4}"])
+                                 ids=["group_4{group_4}", "group_4{group_4}", "group_4{group_4}"])
         def test_04(group):
             a = "hello"
             b = "world"
@@ -145,14 +145,14 @@ def test_n_on_switch_on_have_param(testdir):
             
         @pytest.mark.parametrize("group", 
                                  ["group_4", "group_5", "group_6"], 
-                                 ids=["group_4${group_5}", "group_5${group_5}", "group_6${group_5}"])
+                                 ids=["group_4{group_5}", "group_5{group_5}", "group_6{group_5}"])
         def test_05(group):
             a = "hello"
             b = "world"
             assert a == b
         """
     )
-    result = testdir.runpytest("-n=auto", "--switch=on")
+    result = testdir.runpytest("-sv", "-n=auto", "--switch=on")
     result.assert_outcomes(passed=12, failed=12)
 
 
@@ -199,5 +199,5 @@ if __name__ == '__main__':
     # pytest.main(["--concurrent=on"])
     # pytest.main(["-svv"])
     # pytest.main(["-sv", "-n=3", "--switch=on", "test_plugin.py::test_without"])
-    pytest.main()
+    pytest.main(["-sv"])
     # pytest.main(["-sv", "test_plugin.py::test_n_on_switch_on_have_param"])

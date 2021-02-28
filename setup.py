@@ -4,16 +4,16 @@ from setuptools import setup
 author: fungaegis
 github: https://github.com/fungaegis/pytest-custom-scheduling
 """
-
+with open("./README.rst", "r") as readme:
+    long_description = readme.read()
 setup(
     name='pytest-custom-scheduling',
     url='https://github.com/fungaegis/pytest-custom-scheduling',
-    version='0.1',
+    version='1.0',
     author="fungaegis",
     author_email="fungaegis@gmail.com",
     description='Custom grouping for pytest-xdist',
-    long_description='Custom grouping for pytest-xdist;\n'
-                     ' Usage: cmd line or main function --switch={on:off}',
+    long_description=long_description,
     classifiers=[
         'Framework :: Pytest',
         'Programming Language :: Python :: 3',
