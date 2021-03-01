@@ -9,10 +9,10 @@ with open("./README.rst", "r") as readme:
 setup(
     name='pytest-custom-scheduling',
     url='https://github.com/fungaegis/pytest-custom-scheduling',
-    version='1.0',
+    version='1.1',
     author="fungaegis",
     author_email="fungaegis@gmail.com",
-    description='Custom grouping for pytest-xdist',
+    description='Custom grouping for pytest-xdist, rename test cases name and test cases nodeid, support allure report',
     long_description=long_description,
     classifiers=[
         'Framework :: Pytest',

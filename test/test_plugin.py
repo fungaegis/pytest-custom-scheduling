@@ -153,7 +153,7 @@ def test_n_on_switch_on_have_param(testdir):
         """
     )
     result = testdir.runpytest("-sv", "-n=auto", "--switch=on")
-    result.assert_outcomes(passed=12, failed=12)
+    result.assert_outcomes(passed=12, failed=7)  # 部分在修改名字后重复的
 
 
 def test_on_group_have_param(testdir):

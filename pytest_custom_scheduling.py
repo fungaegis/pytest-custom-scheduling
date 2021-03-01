@@ -27,6 +27,12 @@ def pytest_addoption(parser):
                     choices=["on", "off"],
                     help="open loads custom name scheduling"
                     )
+    group.addoption("--rename",
+                    action="store",
+                    default="off",
+                    choices=["on", "off"],
+                    help="open rename testcase name and nodeid"
+                    )
 
 
 @pytest.mark.trylast
@@ -44,11 +50,17 @@ def pytest_xdist_make_scheduler(config, log):
     return schedulers[dist](config, log)
 
 
+@pytest.mark.trylast
 def pytest_collection_modifyitems(items):
-    pattern = r"\${(\w*)}"
-    for item in items:
-        item.name = item.name.encode("utf-8").decode("unicode_escape")
-        item._nodeid = item.nodeid.encode("utf-8").decode("unicode_escape")
-        if re.search(pattern, item.name):
-            item.name = item.name.replace("TestSmoke", "TestLogin")
-            item._nodeid = item._nodeid.replace("TestSmoke", "TestLogin")
+    value = items[0].config.getvalue("rename")
+    if value == "on":
+        group_pattern = r"{([\w:]*)}"
+        for item in items:
+            item.name = item.name.encode("utf-8").decode("unicode_escape")
+            item._nodeid = item.nodeid.encode("utf-8").decode("unicode_escape")
+            res = re.search(group_pattern, item.name)
+            if res:
+                name = res.group(1)
+                id_name = item.callspec.id.encode("utf-8").decode("unicode_escape")
+                item.name = id_name
+                item._nodeid = name.capitalize() + "::" + id_name
