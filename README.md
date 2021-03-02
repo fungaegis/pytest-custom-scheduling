@@ -65,14 +65,6 @@ Demo
 import pytest
 
 
-@pytest.mark.parametrize("group", 
-                         ["group_1", "group_2", "group_3", "group_4", "group_5", "group_6", 
-                          "group_7", "group_8", "group_9", "group_10", "group_11", "group_12"], 
-                         ids=["group_1{group_1}", "group_2{group_2}", "group_3{group_3}", 
-                              "group_4{group_4}", "group_5{group_5}", "group_6{group_6}", 
-                              "group_7{group_7}", "group_8{group_8}", "group_9{group_9}", 
-                              "group_10{group_10}", "group_11{group_11}", "group_12{group_12}"])
-
 @pytest.mark.parametrize("group", ["group_4", "group_5", "group_6"], 
                          ids=["group_4{group_5}", "group_5{group_5}", "group_6{group_5}"])
 def test_05(group):
